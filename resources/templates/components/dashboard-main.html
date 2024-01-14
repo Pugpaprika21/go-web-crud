@@ -1,0 +1,59 @@
+{{ define "components/dashboard-main.html" }}
+
+<div class="dashboard-main">
+    <div class="row g-2">
+        <div class="col-md-6">
+            <div class="card mb-2">
+                <a href="{{ app_url }}user/">
+                    <div class="row g-0 dashboard-main-content">
+                        <div class="col-md-4 p-2">
+                            <img src="/assets/images/Users.png" class="img-fluid rounded-start">
+                        </div>
+                        <div class="col-md-8 card-dashboard">
+                            <div class="card-body">
+                                <h5 class="card-title">Total</h5>
+                                <p class="card-text">{{ userTotal }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-2">
+                <a href="{{ app_url }}dashboard/">
+                    <div class="row g-0 dashboard-main-content">
+                        <div class="col-md-4 p-2">
+                            <img src="/assets/images/Dashboard.png" class="img-fluid rounded-start">
+                        </div>
+                        <div class="col-md-8 card-dashboard">
+                            <div class="card-body">
+                                <h5 class="card-title">Dashboard</h5>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- <div class="col-md-4">
+            <div class="card mb-2">
+                <a href="{{ app_url }}">
+                    <div class="row g-0 dashboard-main-content">
+                        <div class="col-md-4 p-2">
+                            <img src="/assets/images/Profile.png" class="img-fluid rounded-start">
+                        </div>
+                        <div class="col-md-8 card-dashboard">
+                            <div class="card-body">
+                                <h5 class="card-title">Profile</h5>
+                                <p class="card-text">1</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+{{ end }}

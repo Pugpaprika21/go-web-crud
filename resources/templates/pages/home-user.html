@@ -1,0 +1,110 @@
+{{ template "layouts/header.html" }}
+<!--  -->
+{{ template "layouts/navbar.html"}}
+
+<!-- {{ printf "%#v" .Users }} -->
+
+<link rel="stylesheet" href="/assets/css/home-user.css?t={{ isTime }}">
+
+<div class="container mt-4 mb-4">
+    <div class="d-flex justify-content-center main-card">
+        <div class="btn-create-user mb-2" style="width: 65rem; display: flex; justify-content: flex-end;">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                <a role="button" href="{{ app_url }}user/create" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path
+                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg> create
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row g-2">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center main-card">
+                <div class="card" style="width: 65rem;">
+                    <div class="card-body card-body-main">
+                        <h5 class="card-title">Home</h5>
+
+                        {{ template "components/dashboard-main.html"}}
+
+                        <div class="dashboard-table mt-4">
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-sm align-middle text-center">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <td>#</td> -->
+                                                    <td>profile</td>
+                                                    <td>username</td>
+                                                    <td>password</td>
+                                                    <td>email</td>
+                                                    <td>created</td>
+                                                    <td>action</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{ range $index, $user := .Users }}
+                                                <!--  -->
+                                                <!-- {{ $num := rows $index }} -->
+                                                <!--  -->
+                                                {{ $dmy := convertYMD $user.CreatedAt }}
+                                                <tr>
+                                                    <!-- <td>{{ $num }}</td> -->
+
+                                                    <td>
+                                                        {{ if $user.FileName }}
+                                                        <img src="/assets/uploads/{{ $user.FileName }}" alt="{{ $user.Profile }}" width="50" height="50">
+                                                        <!--  -->
+                                                        {{ else }}
+                                                        <!--  -->
+
+                                                        <!--  -->
+                                                        {{ end }}
+                                                    </td>
+
+                                                    <td>{{ $user.Username }}</td>
+                                                    <td>{{ $user.Password }}</td>
+                                                    <td>{{ $user.Email }}</td>
+                                                    <td>{{ $dmy }}</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                            <button type="button" class="btn btn-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" onclick="onEdit('{{ $user.ID }}');">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                                </svg></button>
+                                                            <button type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" onclick="onDelete('{{ $user.ID }}');">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                                                </svg></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {{ end }}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/home-user.js?t={{ isTime }}"></script>
+
+{{ template "layouts/footer.html"}}

@@ -1,0 +1,8 @@
+.btn,
+.card,
+.form-control,
+.pagination,
+.form-select {
+    border: none;
+    border-radius: 0px;
+}
